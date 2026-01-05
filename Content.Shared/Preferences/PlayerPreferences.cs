@@ -13,11 +13,12 @@ namespace Content.Shared.Preferences
     {
         private Dictionary<int, ICharacterProfile> _characters;
 
-        public PlayerPreferences(IEnumerable<KeyValuePair<int, ICharacterProfile>> characters, int selectedCharacterIndex, Color adminOOCColor)
+        public PlayerPreferences(IEnumerable<KeyValuePair<int, ICharacterProfile>> characters, int selectedCharacterIndex, Color adminOOCColor, int? maxRankPayGrade = null)
         {
             _characters = new Dictionary<int, ICharacterProfile>(characters);
             SelectedCharacterIndex = selectedCharacterIndex;
             AdminOOCColor = adminOOCColor;
+            MaxRankPayGrade = maxRankPayGrade;
         }
 
         /// <summary>
@@ -41,6 +42,12 @@ namespace Content.Shared.Preferences
         public ICharacterProfile SelectedCharacter => Characters[SelectedCharacterIndex];
 
         public Color AdminOOCColor { get; set; }
+
+        /// <summary>
+        ///     Maximum rank pay grade this player is allowed to select.
+        ///     Null means no ranks are available.
+        /// </summary>
+        public int? MaxRankPayGrade { get; }
 
         public int IndexOfCharacter(ICharacterProfile profile)
         {

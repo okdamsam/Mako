@@ -24,7 +24,7 @@ public sealed partial class ReplayMainMenuControl : Control
         LayoutContainer.SetGrowHorizontal(VBox, LayoutContainer.GrowDirection.Begin);
 
         Subtext.FontOverride = resCache.NotoStack2ElectricBoogaloo("/Fonts/NotoSansDisplay/NotoSansDisplay-Bold.ttf", 24); // Goobstation - ZH text support
-        var logoTexture = resCache.GetResource<TextureResource>("/Textures/Logo/logo.png");
+        var logoTexture = resCache.GetResource<TextureResource>("/Textures/_Mako/Logo/logo.png");
         Logo.Texture = logoTexture;
 
         LayoutContainer.SetAnchorPreset(InfoContainer, LayoutContainer.LayoutPreset.BottomLeft);

@@ -66,7 +66,7 @@ namespace Content.Server.Database
                 profiles[profile.Slot] = ConvertProfiles(profile);
             }
 
-            return new PlayerPreferences(profiles, prefs.SelectedCharacterSlot, Color.FromHex(prefs.AdminOOCColor));
+            return new PlayerPreferences(profiles, prefs.SelectedCharacterSlot, Color.FromHex(prefs.AdminOOCColor), prefs.MaxRankPayGrade);
         }
 
         public async Task SaveSelectedCharacterIndexAsync(NetUserId userId, int index)
@@ -179,6 +179,53 @@ namespace Content.Server.Database
 
         }
 
+        public async Task<Dictionary<NetUserId, PlayerPreferences>> GetAllPreferences()
+        {
+            await using var db = await GetDb();
+            
+            var allPrefs = await db.DbContext
+                .Preference
+                .Include(p => p.Profiles).ThenInclude(h => h.Jobs)
+                .Include(p => p.Profiles).ThenInclude(h => h.Antags)
+                .Include(p => p.Profiles).ThenInclude(h => h.Traits)
+                .Include(p => p.Profiles)
+                    .ThenInclude(h => h.Loadouts)
+                    .ThenInclude(l => l.Groups)
+                    .ThenInclude(group => group.Loadouts)
+                .AsSplitQuery()
+                .ToListAsync();
+
+            var result = new Dictionary<NetUserId, PlayerPreferences>();
+            
+            foreach (var pref in allPrefs)
+            {
+                var userId = new NetUserId(pref.UserId);
+                var maxSlot = pref.Profiles.Max(p => p.Slot) + 1;
+                var profiles = new Dictionary<int, ICharacterProfile>(maxSlot);
+                
+                foreach (var profile in pref.Profiles)
+                {
+                    profiles[profile.Slot] = ConvertProfiles(profile);
+                }
+
+                result[userId] = new PlayerPreferences(profiles, pref.SelectedCharacterSlot, Color.FromHex(pref.AdminOOCColor), pref.MaxRankPayGrade);
+            }
+
+            return result;
+        }
+
+        public async Task SetMaxRankPayGrade(NetUserId userId, int? maxRankPayGrade)
+        {
+            await using var db = await GetDb();
+            var prefs = await db.DbContext
+                .Preference
+                .SingleAsync(p => p.UserId == userId.UserId);
+            
+            prefs.MaxRankPayGrade = maxRankPayGrade;
+            
+            await db.DbContext.SaveChangesAsync();
+        }
+
         private static async Task SetSelectedCharacterSlotAsync(NetUserId userId, int newSlot, ServerDbContext db)
         {
             var prefs = await db.Preference.SingleAsync(p => p.UserId == userId.UserId);
@@ -245,6 +292,9 @@ namespace Content.Server.Database
 
             // Get the company with fallback to default "None"
             var company = profile.Company ?? "None";
+            
+            // Get the rank with fallback to null
+            var rank = profile.RankId;
 
             // Validate height and width to prevent sprite scale errors
             // Database migration set default values to 0f for existing profiles
@@ -277,7 +327,8 @@ namespace Content.Server.Database
                 antags.ToHashSet(),
                 traits.ToHashSet(),
                 loadouts,
-                company);
+                company,
+                rank);
         }
 
         private static Profile ConvertProfiles(HumanoidCharacterProfile humanoid, int slot, Profile? profile = null)
@@ -311,6 +362,7 @@ namespace Content.Server.Database
             profile.Slot = slot;
             profile.PreferenceUnavailable = (DbPreferenceUnavailableMode) humanoid.PreferenceUnavailable;
             profile.Company = humanoid.Company;
+            profile.RankId = humanoid.Rank;
 
             profile.Jobs.Clear();
             profile.Jobs.AddRange(

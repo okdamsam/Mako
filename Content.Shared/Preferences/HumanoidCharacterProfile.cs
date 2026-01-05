@@ -142,6 +142,12 @@ namespace Content.Shared.Preferences
         /// </summary>
         [DataField]
         public string Company { get; private set; } = "None";
+        
+        /// <summary>
+        /// The rank of the character
+        /// </summary>
+        [DataField]
+        public string? Rank { get; private set; }
 
         public HumanoidCharacterProfile(
             string name,
@@ -158,7 +164,8 @@ namespace Content.Shared.Preferences
             HashSet<ProtoId<AntagPrototype>> antagPreferences,
             HashSet<ProtoId<TraitPrototype>> traitPreferences,
             Dictionary<string, RoleLoadout> loadouts,
-            string company = "None")
+            string company = "None",
+            string? rank = null)
         {
             Name = name;
             FlavorText = flavortext;
@@ -175,6 +182,7 @@ namespace Content.Shared.Preferences
             _traitPreferences = traitPreferences;
             _loadouts = loadouts;
             Company = company;
+            Rank = rank;
         }
 
         /// <summary>Copy constructor but with overridable references (to prevent useless copies)</summary>
@@ -185,7 +193,7 @@ namespace Content.Shared.Preferences
             HashSet<ProtoId<TraitPrototype>> traitPreferences,
             Dictionary<string, RoleLoadout> loadouts)
             : this(other.Name, other.FlavorText, other.Species, other.Age, other.Sex, other.Gender, other.BankBalance, other.Appearance, other.SpawnPriority,
-                jobPriorities, other.PreferenceUnavailable, antagPreferences, traitPreferences, loadouts, other.Company)
+                jobPriorities, other.PreferenceUnavailable, antagPreferences, traitPreferences, loadouts, other.Company, other.Rank)
         {
         }
 
@@ -205,7 +213,8 @@ namespace Content.Shared.Preferences
                 new HashSet<ProtoId<AntagPrototype>>(other.AntagPreferences),
                 new HashSet<ProtoId<TraitPrototype>>(other.TraitPreferences),
                 new Dictionary<string, RoleLoadout>(other.Loadouts),
-                other.Company)
+                other.Company,
+                other.Rank)
         {
         }
 
@@ -318,6 +327,11 @@ namespace Content.Shared.Preferences
         public HumanoidCharacterProfile WithSpecies(string species)
         {
             return new(this) { Species = species };
+        }
+
+        public HumanoidCharacterProfile WithRank(string? rank)
+        {
+            return new(this) { Rank = rank };
         }
 
 
@@ -510,6 +524,7 @@ namespace Content.Shared.Preferences
             if (SpawnPriority != other.SpawnPriority) return false;
             if (Species != other.Species) return false;
             if (Company != other.Company) return false;
+            if (Rank != other.Rank) return false;
             if (!_jobPriorities.SequenceEqual(other._jobPriorities)) return false;
             if (!_antagPreferences.SequenceEqual(other._antagPreferences)) return false;
             if (!_traitPreferences.SequenceEqual(other._traitPreferences)) return false;

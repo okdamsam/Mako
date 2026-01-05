@@ -799,6 +799,10 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("integer")
                         .HasColumnName("mono_coins");
 
+                    b.Property<int?>("MaxRankPayGrade")
+                        .HasColumnType("integer")
+                        .HasColumnName("max_rank_pay_grade");
+
                     b.Property<int>("SelectedCharacterSlot")
                         .HasColumnType("integer")
                         .HasColumnName("selected_character_slot");
@@ -889,6 +893,10 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Property<int>("PreferenceId")
                         .HasColumnType("integer")
                         .HasColumnName("preference_id");
+
+                    b.Property<string>("RankId")
+                        .HasColumnType("text")
+                        .HasColumnName("rank_id");
 
                     b.Property<int>("PreferenceUnavailable")
                         .HasColumnType("integer")

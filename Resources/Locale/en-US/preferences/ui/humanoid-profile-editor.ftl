@@ -22,6 +22,8 @@ humanoid-profile-editor-export-image-button = Export image
 humanoid-profile-editor-open-image-button = Open images
 humanoid-profile-editor-save-button = Save
 humanoid-profile-editor-reset-button = Reset
+humanoid-profile-editor-rank-label = Rank:
+humanoid-profile-editor-rank-none = None
 humanoid-profile-editor-spawn-priority-label = Spawn priority:
 # Mono Start
 humanoid-profile-editor-height-label = Height:

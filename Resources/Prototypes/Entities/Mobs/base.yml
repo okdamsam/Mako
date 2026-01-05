@@ -49,6 +49,7 @@
   - type: PassiveThermalSignature # Mono
     signature: 225 # if nothing else is generating heat, 30m radius, 60m with 4 mobs, 120 with 16
   - type: ThermalSignature # Mono
+  - type: Rank # Task Force Mako - Rank system
 
 - type: entity
   save: false

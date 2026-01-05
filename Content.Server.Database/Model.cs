@@ -393,6 +393,7 @@ namespace Content.Server.Database
         public int SelectedCharacterSlot { get; set; }
         public string AdminOOCColor { get; set; } = null!;
         public int MonoCoins { get; set; } = 0;
+        public int? MaxRankPayGrade { get; set; }
         public List<Profile> Profiles { get; } = new();
     }
 
@@ -426,6 +427,8 @@ namespace Content.Server.Database
         [Column("pref_unavailable")] public DbPreferenceUnavailableMode PreferenceUnavailable { get; set; }
         
         public string Company { get; set; } = "None";
+        
+        public string? RankId { get; set; }
 
         public int PreferenceId { get; set; }
         public Preference Preference { get; set; } = null!;

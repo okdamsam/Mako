@@ -753,6 +753,10 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("INTEGER")
                         .HasColumnName("mono_coins");
 
+                    b.Property<int?>("MaxRankPayGrade")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("max_rank_pay_grade");
+
                     b.Property<int>("SelectedCharacterSlot")
                         .HasColumnType("INTEGER")
                         .HasColumnName("selected_character_slot");
@@ -841,6 +845,10 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Property<int>("PreferenceId")
                         .HasColumnType("INTEGER")
                         .HasColumnName("preference_id");
+
+                    b.Property<string>("RankId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("rank_id");
 
                     b.Property<int>("PreferenceUnavailable")
                         .HasColumnType("INTEGER")

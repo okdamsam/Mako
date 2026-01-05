@@ -1,0 +1,19 @@
+Order: 1
+Name: Mako
+Entries:
+- author: OkSam
+  changes:
+    - type: Add
+      message: Added persistent rank system with account-level permissions - admins can now set maximum rank levels for players
+    - type: Add
+      message: Added rank permissions admin panel with search functionality (use 'rankpermissions' console command)
+    - type: Add
+      message: Character creation now includes rank selector dropdown filtered by player's maximum allowed rank
+    - type: Add
+      message: Ranks display in character preview panel with color coding (E1-E3 grey, E4-E9 white, O1-O4 gold, O5+ dark gold)
+    - type: Add
+      message: Rank enforcement on spawn - automatically downgrades characters exceeding player's max rank or removes ranks when permission is cleared
+    - type: Add
+      message: Live rank permission updates - changes apply immediately without requiring reconnection
+  id: 1
+  time: '2026-01-05T00:00:00.0000000+00:00'

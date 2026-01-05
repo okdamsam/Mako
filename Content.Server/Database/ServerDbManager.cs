@@ -46,6 +46,8 @@ namespace Content.Server.Database
         // Single method for two operations for transaction.
         Task DeleteSlotAndSetSelectedIndex(NetUserId userId, int deleteSlot, int newSlot);
         Task<PlayerPreferences?> GetPlayerPreferencesAsync(NetUserId userId, CancellationToken cancel);
+        Task<Dictionary<NetUserId, PlayerPreferences>> GetAllPreferences();
+        Task SetMaxRankPayGrade(NetUserId userId, int? maxRankPayGrade);
         #endregion
 
         #region MonoCoins
@@ -502,6 +504,18 @@ namespace Content.Server.Database
         {
             DbReadOpsMetric.Inc();
             return RunDbCommand(() => _db.GetPlayerPreferencesAsync(userId, cancel));
+        }
+
+        public Task<Dictionary<NetUserId, PlayerPreferences>> GetAllPreferences()
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetAllPreferences());
+        }
+
+        public Task SetMaxRankPayGrade(NetUserId userId, int? maxRankPayGrade)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SetMaxRankPayGrade(userId, maxRankPayGrade));
         }
 
         public Task<int> GetMonoCoinsAsync(NetUserId userId, CancellationToken cancel = default)

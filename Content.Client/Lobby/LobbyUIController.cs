@@ -251,6 +251,9 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         PreviewPanel.SetSummaryText(humanoid.Summary);
         PreviewPanel.SetBankBalanceText(humanoid.BankBalanceText); // Frontier
 
+        // Rank Display
+        PreviewPanel.SetRankText(humanoid.Rank, _prototypeManager);
+
         // Company Display
         var companyId = humanoid.Company;
         if (_prototypeManager.TryIndex<CompanyPrototype>(companyId, out var company))

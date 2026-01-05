@@ -1,0 +1,221 @@
+# Task Force Mako Rank Prototypes
+# Based on US Navy/Marine Corps rank structure
+
+# Enlisted Ranks
+- type: rank
+  id: CrewmanRecruit
+  name: Crewman Recruit
+  prefix: CR
+  grade: E-1
+  payGrade: 1
+  category: Enlisted
+  description: Entry-level enlisted rank.
+
+- type: rank
+  id: CrewmanApprentice
+  name: Crewman Apprentice
+  prefix: CA
+  grade: E-2
+  payGrade: 2
+  category: Enlisted
+  description: Junior enlisted rank.
+
+- type: rank
+  id: Crewman
+  name: Crewman
+  prefix: CN
+  grade: E-3
+  payGrade: 3
+  category: Enlisted
+  description: Standard enlisted rank.
+
+- type: rank
+  id: PettyOfficer3rd
+  name: Petty Officer Third Class
+  prefix: PO3
+  grade: E-4
+  payGrade: 4
+  category: Enlisted
+  description: Junior non-commissioned officer.
+
+- type: rank
+  id: PettyOfficer2nd
+  name: Petty Officer Second Class
+  prefix: PO2
+  grade: E-5
+  payGrade: 5
+  category: Enlisted
+  description: Non-commissioned officer.
+
+- type: rank
+  id: PettyOfficer1st
+  name: Petty Officer First Class
+  prefix: PO1
+  grade: E-6
+  payGrade: 6
+  category: Enlisted
+  description: Senior non-commissioned officer.
+
+- type: rank
+  id: ChiefPettyOfficer
+  name: Chief Petty Officer
+  prefix: CPO
+  grade: E-7
+  payGrade: 7
+  category: Enlisted
+  description: Chief petty officer rank.
+
+- type: rank
+  id: SeniorChiefPettyOfficer
+  name: Senior Chief Petty Officer
+  prefix: SCPO
+  grade: E-8
+  payGrade: 8
+  category: Enlisted
+  description: Senior chief petty officer.
+
+- type: rank
+  id: MasterChiefPettyOfficer
+  name: Master Chief Petty Officer
+  prefix: MCPO
+  grade: E-9
+  payGrade: 9
+  category: Enlisted
+  description: Master chief petty officer, highest enlisted rank.
+
+# Warrant Officer Ranks
+- type: rank
+  id: WarrantOfficer1
+  name: Warrant Officer 1
+  prefix: WO1
+  grade: W-1
+  payGrade: 10
+  category: Warrant
+  description: Junior warrant officer.
+
+- type: rank
+  id: ChiefWarrantOfficer2
+  name: Chief Warrant Officer 2
+  prefix: CWO2
+  grade: W-2
+  payGrade: 11
+  category: Warrant
+  description: Chief warrant officer, grade 2.
+
+- type: rank
+  id: ChiefWarrantOfficer3
+  name: Chief Warrant Officer 3
+  prefix: CWO3
+  grade: W-3
+  payGrade: 12
+  category: Warrant
+  description: Chief warrant officer, grade 3.
+
+- type: rank
+  id: ChiefWarrantOfficer4
+  name: Chief Warrant Officer 4
+  prefix: CWO4
+  grade: W-4
+  payGrade: 13
+  category: Warrant
+  description: Senior chief warrant officer, grade 4.
+
+- type: rank
+  id: ChiefWarrantOfficer5
+  name: Chief Warrant Officer 5
+  prefix: CWO5
+  grade: W-5
+  payGrade: 14
+  category: Warrant
+  description: Master chief warrant officer, grade 5.
+
+# Officer Ranks
+- type: rank
+  id: Ensign
+  name: Ensign
+  prefix: ENS
+  grade: O-1
+  payGrade: 15
+  category: Officer
+  description: Junior commissioned officer, entry rank.
+
+- type: rank
+  id: LieutenantJuniorGrade
+  name: Lieutenant Junior Grade
+  prefix: LTJG
+  grade: O-2
+  payGrade: 16
+  category: Officer
+  description: Junior commissioned officer.
+
+- type: rank
+  id: Lieutenant
+  name: Lieutenant
+  prefix: LT
+  grade: O-3
+  payGrade: 17
+  category: Officer
+  description: Mid-grade commissioned officer.
+
+- type: rank
+  id: LieutenantCommander
+  name: Lieutenant Commander
+  prefix: LCDR
+  grade: O-4
+  payGrade: 18
+  category: Officer
+  description: Senior commissioned officer, department head level.
+
+- type: rank
+  id: Commander
+  name: Commander
+  prefix: CDR
+  grade: O-5
+  payGrade: 19
+  category: Officer
+  description: Senior officer, executive officer level.
+
+- type: rank
+  id: Captain
+  name: Captain
+  prefix: CAPT
+  grade: O-6
+  payGrade: 20
+  category: Officer
+  description: Senior officer, commanding officer level.
+
+- type: rank
+  id: RearAdmiralLowerHalf
+  name: Rear Admiral (Lower Half)
+  prefix: RDML
+  grade: O-7
+  payGrade: 21
+  category: Flag
+  description: Junior flag officer, one-star admiral.
+
+- type: rank
+  id: RearAdmiralUpperHalf
+  name: Rear Admiral (Upper Half)
+  prefix: RADM
+  grade: O-8
+  payGrade: 22
+  category: Flag
+  description: Flag officer, two-star admiral.
+
+- type: rank
+  id: ViceAdmiral
+  name: Vice Admiral
+  prefix: VADM
+  grade: O-9
+  payGrade: 23
+  category: Flag
+  description: Senior flag officer, three-star admiral.
+
+- type: rank
+  id: Admiral
+  name: Admiral
+  prefix: ADM
+  grade: O-10
+  payGrade: 24
+  category: Flag
+  description: Highest flag officer, four-star admiral.

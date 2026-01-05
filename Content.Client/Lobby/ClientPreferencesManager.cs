@@ -51,7 +51,7 @@ namespace Content.Client.Lobby
 
         public void SelectCharacter(int slot)
         {
-            Preferences = new PlayerPreferences(Preferences.Characters, slot, Preferences.AdminOOCColor);
+            Preferences = new PlayerPreferences(Preferences.Characters, slot, Preferences.AdminOOCColor, Preferences.MaxRankPayGrade);
             var msg = new MsgSelectCharacter
             {
                 SelectedCharacterIndex = slot
@@ -77,7 +77,7 @@ namespace Content.Client.Lobby
 
             profile.EnsureValid(_playerManager.LocalSession!, collection);
             var characters = new Dictionary<int, ICharacterProfile>(Preferences.Characters) {[slot] = profile};
-            Preferences = new PlayerPreferences(characters, Preferences.SelectedCharacterIndex, Preferences.AdminOOCColor);
+            Preferences = new PlayerPreferences(characters, Preferences.SelectedCharacterIndex, Preferences.AdminOOCColor, Preferences.MaxRankPayGrade);
             var msg = new MsgUpdateCharacter
             {
                 Profile = profile,
@@ -100,7 +100,7 @@ namespace Content.Client.Lobby
 
             var l = lowest.Value;
             characters.Add(l, profile);
-            Preferences = new PlayerPreferences(characters, Preferences.SelectedCharacterIndex, Preferences.AdminOOCColor);
+            Preferences = new PlayerPreferences(characters, Preferences.SelectedCharacterIndex, Preferences.AdminOOCColor, Preferences.MaxRankPayGrade);
 
             UpdateCharacter(profile, l);
         }
@@ -113,7 +113,7 @@ namespace Content.Client.Lobby
         public void DeleteCharacter(int slot)
         {
             var characters = Preferences.Characters.Where(p => p.Key != slot);
-            Preferences = new PlayerPreferences(characters, Preferences.SelectedCharacterIndex, Preferences.AdminOOCColor);
+            Preferences = new PlayerPreferences(characters, Preferences.SelectedCharacterIndex, Preferences.AdminOOCColor, Preferences.MaxRankPayGrade);
             var msg = new MsgDeleteCharacter
             {
                 Slot = slot
@@ -151,7 +151,7 @@ namespace Content.Client.Lobby
 
                 if (needsUpdate)
                 {
-                    Preferences = new PlayerPreferences(characters, Preferences.SelectedCharacterIndex, Preferences.AdminOOCColor);
+                    Preferences = new PlayerPreferences(characters, Preferences.SelectedCharacterIndex, Preferences.AdminOOCColor, Preferences.MaxRankPayGrade);
 
                     // Update the selected character on the server if needed
                     var selectedIndex = Preferences.SelectedCharacterIndex;

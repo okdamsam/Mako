@@ -85,6 +85,12 @@
                                     <Control HorizontalExpand="True"/>
                                     <Button Name="ShowClothes" Pressed="True" ToggleMode="True" Text="{Loc 'humanoid-profile-editor-clothing-show'}" HorizontalAlignment="Right" />
                                 </BoxContainer>
+                                <!-- Rank -->
+                                <BoxContainer HorizontalExpand="True">
+                                    <Label Text="{Loc 'humanoid-profile-editor-rank-label'}" />
+                                    <Control HorizontalExpand="True"/>
+                                    <OptionButton Name="RankButton" HorizontalAlignment="Right" />
+                                </BoxContainer>
                                 <!-- Spawn Priority -->
                                 <BoxContainer HorizontalExpand="True">
                                     <Label Text="{Loc 'humanoid-profile-editor-spawn-priority-label'}" />

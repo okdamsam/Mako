@@ -98,6 +98,7 @@ namespace Content.Client.Lobby.UI
         private ColorSelectorSliders _rgbSkinColorSelector;
 
         private bool _isDirty;
+        private bool _updatingRankButton;
 
         [ValidatePrototypeId<GuideEntryPrototype>]
         private const string DefaultSpeciesGuidebook = "Species";
@@ -361,6 +362,24 @@ namespace Content.Client.Lobby.UI
             };
 
             #endregion SpawnPriority
+
+            #region Rank
+
+            RankButton.OnItemSelected += args =>
+            {
+                if (_updatingRankButton)
+                    return;
+                
+                RankButton.SelectId(args.Id);
+                var metadata = RankButton.GetItemMetadata(args.Id) as string;
+                if (args.Id == 0 || string.IsNullOrEmpty(metadata))
+                    SetRank(null);
+                else
+                    SetRank(metadata);
+            };
+            PopulateRankButton();
+
+            #endregion Rank
 
             #region Height
 
@@ -1714,6 +1733,64 @@ namespace Content.Client.Lobby.UI
             SetDirty();
         }
 
+        private void SetRank(string? rankId)
+        {
+            Profile = Profile?.WithRank(rankId);
+            SetDirty();
+            ReloadPreview();
+        }
+
+        private void PopulateRankButton()
+        {
+            _updatingRankButton = true;
+            RankButton.Clear();
+            
+            // Add "None" option at index 0
+            RankButton.AddItem(Loc.GetString("humanoid-profile-editor-rank-none"), 0);
+            RankButton.SetItemMetadata(0, "");
+
+            // Get max allowed rank from preferences
+            var maxRankPayGrade = _preferencesManager.Preferences?.MaxRankPayGrade;
+
+            if (!maxRankPayGrade.HasValue)
+            {
+                // No max rank set, no ranks available
+                RankButton.SelectId(0);
+                return;
+            }
+
+            // Get all ranks up to the max allowed
+            var availableRanks = _prototypeManager.EnumeratePrototypes<Content.Shared._Mako.Ranks.RankPrototype>()
+                .Where(r => r.PayGrade <= maxRankPayGrade.Value)
+                .OrderBy(r => r.PayGrade)
+                .ToList();
+
+            var index = 1;
+            foreach (var rank in availableRanks)
+            {
+                RankButton.AddItem($"{rank.Prefix} - {rank.Name} ({rank.Grade})", index);
+                RankButton.SetItemMetadata(index, rank.ID);
+                index++;
+            }
+
+            // Select current rank or none
+            if (Profile?.Rank != null)
+            {
+                for (int i = 0; i < RankButton.ItemCount; i++)
+                {
+                    if (RankButton.GetItemMetadata(i) as string == Profile.Rank)
+                    {
+                        RankButton.SelectId(i);
+                        _updatingRankButton = false;
+                        return;
+                    }
+                }
+            }
+
+            RankButton.SelectId(0);
+            _updatingRankButton = false;
+        }
+
         private void SetHeight(float newHeight)
         {
             Profile = Profile?.WithCharacterAppearance(Profile.Appearance.WithHeight(newHeight));
@@ -1940,6 +2017,7 @@ namespace Content.Client.Lobby.UI
             }
 
             SpawnPriorityButton.SelectId((int) Profile.SpawnPriority);
+            PopulateRankButton();
         }
 
         private void UpdateHeightControls()

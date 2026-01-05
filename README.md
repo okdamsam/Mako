@@ -1,4 +1,4 @@
-<p align="center"> <img alt="Frontier Station 14" width="880" height="300" src="https://github.com/okdamsam/Mako/blob/main/Resources/Textures/_Mako/Logo/logo.png?raw=true" /></p>
+<p align="center"> <img alt="Frontier Station 14" max-width="880" max-height="300" src="https://github.com/okdamsam/Mako/blob/main/Resources/Textures/_Mako/Logo/logo.png?raw=true" /></p>
 
 Mako is a fork of [Monolith](https://github.com/Monolith-Station/Monolith), which is a fork of [Frontier Station 14](https://github.com/new-frontiers-14/frontier-station-14) that runs on the [Robust Toolbox](https://github.com/space-wizards/RobustToolbox) engine written in C#.
 
